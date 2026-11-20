@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Парикмахерская У Татьяны — Кореновск, ул. Коммунистическая, 20а</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +55,8 @@
     .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; }
     .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: white; padding: 10px 24px; border-radius: 100px; font-size: 14px; font-weight: 700; color: var(--text); box-shadow: var(--shadow-sm); border: 1px solid var(--border); margin-bottom: 32px; }
     .hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
-    .hero h1 { font-family: var(--font-heading); font-size: 72px; font-weight: 700; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1.5px; color: var(--text); }
+    /* ИСПРАВЛЕНИЕ ОБРЕЗАНИЯ БУКВ: уменьшен letter-spacing и увеличен line-height */
+    .hero h1 { font-family: var(--font-heading); font-size: 72px; font-weight: 700; line-height: 1.15; margin-bottom: 24px; letter-spacing: -0.5px; color: var(--text); }
     .hero h1 span { font-style: italic; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-subtitle { font-size: 20px; color: var(--text-light); margin-bottom: 48px; max-width: 520px; }
     .hero-buttons { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 56px; }
@@ -85,7 +86,7 @@
     section { padding: 120px 0; }
     .section-header { text-align: center; margin-bottom: 80px; }
     .section-label { display: inline-block; color: var(--text); font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; background: white; padding: 8px 20px; border-radius: 100px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-    .section-title { font-family: var(--font-heading); font-size: 52px; font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -1px; }
+    .section-title { font-family: var(--font-heading); font-size: 52px; font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.5px; }
     .section-title .gradient-text { font-style: italic; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .section-subtitle { font-size: 18px; color: var(--text-light); max-width: 600px; margin: 0 auto; }
 
@@ -243,7 +244,7 @@
     .chat-quick-reply { background: white; border: 1px solid var(--border); color: var(--text); padding: 12px 20px; border-radius: 100px; font-size: 15px; cursor: pointer; transition: all 0.2s; font-weight: 600; font-family: inherit; box-shadow: var(--shadow-sm); }
     .chat-quick-reply:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); }
     .chat-input-wrap { padding: 24px; background: white; border-top: 1px solid var(--border); display: flex; gap: 16px; }
-    .chat-input { flex: 1; padding: 16px 24px; border: 1px solid var(--border); border-radius: 100px; font-size: 16px; outline: none; transition: border 0.2s; font-family: inherit; background: var(--bg-soft); }
+    .chat-input { flex: 1; padding: 16px 24px; border: 1px solid var(--border); border-radius: 100px; font-size: 16px; outline: none; transition: border 0.2s; font-family: inherit; background: var(--bg-soft); line-height: 1.5; }
     .chat-input:focus { border-color: var(--primary); background: white; }
     .chat-send { width: 56px; height: 56px; background: var(--gradient); color: white; border: none; border-radius: 50%; cursor: pointer; font-size: 22px; transition: transform 0.2s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     .chat-send:hover { transform: scale(1.05); }
@@ -258,7 +259,8 @@
     .modal-title { font-family: var(--font-heading); font-size: 32px; font-weight: 700; margin-bottom: 12px; text-align: center; color: var(--text); }
     .modal-subtitle { font-size: 16px; color: var(--text-light); text-align: center; margin-bottom: 32px; font-weight: 500; }
     .modal-form { display: flex; flex-direction: column; gap: 20px; }
-    .modal-input { width: 100%; padding: 20px 24px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 16px; font-family: inherit; outline: none; transition: all 0.2s; background: var(--bg-soft); color: var(--text); font-weight: 500; }
+    /* ИСПРАВЛЕНИЕ ОБРЕЗАНИЯ БУКВ В ПОЛЯХ ВВОДА */
+    .modal-input { width: 100%; padding: 20px 24px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 16px; font-family: inherit; outline: none; transition: all 0.2s; background: var(--bg-soft); color: var(--text); font-weight: 500; line-height: 1.5; }
     .modal-input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(0,0,0,0.05); }
     .modal-btn { width: 100%; padding: 22px; background: var(--gradient); color: white; border: none; border-radius: var(--radius-sm); font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: inherit; margin-top: 12px; }
     .modal-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25); }
@@ -267,7 +269,7 @@
     .form-message.success { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; display: block; }
     .form-message.error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; display: block; }
 
-    /* АДАПТИВ */
+    /* АДАПТИВ (МОБИЛЬНАЯ ВЕРСИЯ) */
     @media (max-width: 1024px) {
         .hero h1 { font-size: 56px; }
         .features-grid { grid-template-columns: repeat(2, 1fr); }
@@ -277,30 +279,32 @@
     @media (max-width: 768px) {
         .hero { padding: 140px 0 80px; }
         .hero-grid { grid-template-columns: 1fr; gap: 64px; text-align: center; }
-        .hero h1 { font-size: 48px; }
-        .hero-subtitle { margin: 0 auto 40px; }
+        .hero h1 { font-size: 42px; line-height: 1.2; }
+        .hero-subtitle { margin: 0 auto 40px; font-size: 18px; }
         .hero-buttons { justify-content: center; }
         .hero-stats { justify-content: center; }
-        .hero-visual { height: 400px; } 
+        .hero-visual { height: 350px; } 
         .services-grid, .doctors-grid, .reviews-grid, .contacts-grid { grid-template-columns: 1fr; }
-        .section-title { font-size: 42px; }
+        .section-title { font-size: 36px; }
         .nav-links, .nav-phone { display: none; }
         .burger { display: flex; }
         .nav-links.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 32px; gap: 20px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-lg); }
-        .chat-window { right: 20px; bottom: 110px; width: calc(100vw - 40px); }
-        .chat-toggle { right: 20px; bottom: 20px; width: 70px; height: 70px; }
-        .modal-content { padding: 40px 24px; }
+        
+        /* Оптимизация чата и модалки для мобильных */
+        .chat-window { right: 16px; bottom: 100px; width: calc(100vw - 32px); height: 70vh; }
+        .chat-toggle { right: 20px; bottom: 20px; width: 64px; height: 64px; font-size: 28px; }
+        .modal-content { padding: 32px 20px; width: 95%; max-height: 90vh; overflow-y: auto; }
+        .ai-input-wrap, .ai-header { padding: 20px; }
+        .ai-messages { padding: 20px; height: 400px; }
     }
     @media (max-width: 480px) {
-        .hero h1 { font-size: 38px; }
+        .hero h1 { font-size: 34px; }
         .hero-buttons .btn { width: 100%; }
         .hero-stats { flex-direction: column; gap: 32px; }
         .features-grid, .steps-grid, .footer-grid { grid-template-columns: 1fr; }
         section { padding: 80px 0; }
-        .ai-header, .ai-messages, .ai-quick-replies, .ai-input-wrap { padding: 24px; }
-        .ai-messages { height: 380px; }
-        .ai-input { padding: 16px 20px; }
-        .ai-send { width: 54px; height: 54px; }
+        .ai-send { width: 48px; height: 48px; }
+        .modal-title { font-size: 26px; }
     }
 </style>
 </head>
@@ -440,7 +444,7 @@
             <p class="section-subtitle">Ответы на самые популярные вопросы наших клиентов</p>
         </div>
         <div class="faq-container">
-            <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Как записаться?</span><div class="faq-toggle">+</div></div><div class="faq-answer">Вы можете записаться через форму на сайте, по телефону или написав нам в WhatsApp/Telegram. Также можете спросить нашего ИИ-ассистента.</div></div>
+            <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Как записаться?</span><div class="faq-toggle">+</div></div><div class="faq-answer">Вы можете записаться через форму на сайте, по телефону или написав нам. Также можете спросить нашего ИИ-ассистента.</div></div>
             <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Можно ли прийти без записи?</span><div class="faq-toggle">+</div></div><div class="faq-answer">Да, но мы рекомендуем записываться заранее, чтобы не ждать в очереди. Особенно в выходные дни.</div></div>
             <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Работаете ли вы в праздники?</span><div class="faq-toggle">+</div></div><div class="faq-answer">Да, мы работаем без выходных. В праздничные дни возможен особый график — уточняйте по телефону.</div></div>
             <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Есть ли скидки для постоянных клиентов?</span><div class="faq-toggle">+</div></div><div class="faq-answer">Да, у нас есть система лояльности. Каждый 5-й визит — скидка 10%. Уточните у администратора.</div></div>
@@ -502,10 +506,6 @@
                 <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Адрес</div><a href="#" class="contact-value">г. Кореновск, ул. Коммунистическая, 20а</a></div></div>
                 <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Телефон</div><a href="tel:+79182348447" class="contact-value">+7 (918) 234-84-47</a></div></div>
                 <div class="contact-item"><div class="contact-icon">🕐</div><div><div class="contact-label">Режим работы</div><div class="contact-value">Ежедневно: 9:00 – 20:00</div></div></div>
-                <div class="messenger-buttons">
-                    <a href="https://wa.me/79182348447" class="msg-btn wa" target="_blank">💬 WhatsApp</a>
-                    <a href="https://t.me/+79182348447" class="msg-btn tg" target="_blank">✈️ Telegram</a>
-                </div>
             </div>
             <div class="map-wrap">
                 <iframe src="https://yandex.ru/map-widget/v1/?text=Кореновск%2C%20Коммунистическая%2020а&z=16" allowfullscreen></iframe>
@@ -588,25 +588,20 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.outputEncoding = THREE.sRGBEncoding;
     container.appendChild(renderer.domElement);
 
-    // Свет для бликов
     scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    
     const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
     keyLight.position.set(5, 5, 10);
     scene.add(keyLight);
-    
     const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
     fillLight.position.set(-5, 5, 5);
     scene.add(fillLight);
-    
     const rimLight = new THREE.DirectionalLight(0xffffff, 1.0);
     rimLight.position.set(0, -5, -10);
     scene.add(rimLight);
 
-    // Материалы
     const silverMat = new THREE.MeshStandardMaterial({ color: 0xdddddd, metalness: 0.95, roughness: 0.1 });
-    const blackMat = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.8, roughness: 0.2 }); // Черные ручки
-    const goldMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 1.0, roughness: 0.2 }); // Золотой винт
+    const blackMat = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.8, roughness: 0.2 });
+    const goldMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 1.0, roughness: 0.2 });
 
     const scissorsGroup = new THREE.Group();
     scene.add(scissorsGroup);
@@ -614,102 +609,72 @@ document.addEventListener('DOMContentLoaded', () => {
     function createHalf(isLeft) {
         const group = new THREE.Group();
         const dir = isLeft ? 1 : -1;
-
-        // 1. Лезвие (Серебристое)
         const bladeGeo = new THREE.CylinderGeometry(0.02, 0.15, 3.5, 16);
-        bladeGeo.translate(0, 1.75, 0); // Смещаем центр вращения вниз
-        bladeGeo.scale(0.2, 1, 1); // Делаем плоским
+        bladeGeo.translate(0, 1.75, 0);
+        bladeGeo.scale(0.2, 1, 1);
         const blade = new THREE.Mesh(bladeGeo, silverMat);
         blade.rotation.z = dir * -0.1;
         blade.position.x = dir * -0.1;
         group.add(blade);
 
-        // 2. Шейка (Серебристая)
         const neckGeo = new THREE.CylinderGeometry(0.08, 0.12, 0.8, 16);
         const neck = new THREE.Mesh(neckGeo, silverMat);
         neck.position.set(dir * 0.3, -0.4, 0);
         neck.rotation.z = dir * 0.6;
         group.add(neck);
 
-        // 3. Кольцо для пальцев (ЧЕРНОЕ)
         const ringGeo = new THREE.TorusGeometry(0.45, 0.12, 16, 32);
         const ring = new THREE.Mesh(ringGeo, blackMat);
         ring.position.set(dir * 0.8, -1.0, 0);
-        ring.scale.set(1, 1.15, 1); // Овальная форма
+        ring.scale.set(1, 1.15, 1);
         group.add(ring);
 
-        // 4. Упор для мизинца (ЧЕРНЫЙ)
         const restGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.4, 8);
         const rest = new THREE.Mesh(restGeo, blackMat);
         rest.position.set(dir * 1.2, -0.7, 0);
         rest.rotation.z = dir * 0.8;
         group.add(rest);
-
         return group;
     }
 
     const leftHalf = createHalf(true);
     const rightHalf = createHalf(false);
-
-    // Начальный угол
     leftHalf.rotation.z = 0.25;
     rightHalf.rotation.z = -0.25;
 
-    // 5. Винт (Золотой)
     const screwBase = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.25, 16), goldMat);
     screwBase.rotation.x = Math.PI / 2;
-    
     const screwHead = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.08, 16), goldMat);
     screwHead.rotation.x = Math.PI / 2;
     screwHead.position.z = 0.15;
-
     const slot = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.02, 0.09), new THREE.MeshStandardMaterial({ color: 0x000000 }));
     slot.position.z = 0.2;
-
     const pivotGroup = new THREE.Group();
     pivotGroup.add(screwBase, screwHead, slot);
     pivotGroup.rotation.z = Math.PI / 4;
-
     scissorsGroup.add(leftHalf, rightHalf, pivotGroup);
-    
-    // Наклон для красивого обзора
     scissorsGroup.rotation.x = 0.2;
     scissorsGroup.rotation.y = -0.3;
 
-    // Анимация
-    let time = 0;
-    let mouseX = 0, mouseY = 0;
-    let targetRotX = 0.2, targetRotY = -0.3;
-
+    let time = 0, mouseX = 0, mouseY = 0, targetRotX = 0.2, targetRotY = -0.3;
     container.addEventListener('mousemove', (e) => {
         const rect = container.getBoundingClientRect();
         mouseX = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
         mouseY = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
     });
-
-    container.addEventListener('mouseleave', () => {
-        mouseX = 0;
-        mouseY = 0;
-    });
+    container.addEventListener('mouseleave', () => { mouseX = 0; mouseY = 0; });
 
     function animate() {
         requestAnimationFrame(animate);
         time += 0.04;
-        
-        // Смыкание/размыкание лезвий
         const cutAngle = Math.sin(time * 2.5) * 0.25 + 0.15;
         leftHalf.rotation.z = cutAngle;
         rightHalf.rotation.z = -cutAngle;
-        
-        // Парение
         scissorsGroup.position.y = Math.sin(time * 1.2) * 0.15;
-        
-        // Параллакс от мыши
         targetRotY = -0.3 + mouseX * 0.5;
         targetRotX = 0.2 + mouseY * 0.3;
         scissorsGroup.rotation.y += (targetRotY - scissorsGroup.rotation.y) * 0.05;
         scissorsGroup.rotation.x += (targetRotX - scissorsGroup.rotation.x) * 0.05;
-        
         renderer.render(scene, camera);
     }
     animate();
@@ -733,10 +698,10 @@ const knowledgeBase = [
     { id: 'schedule', triggers: ['работ', 'график', 'час', 'открыт', 'закрыт', 'суббот', 'воскресен', 'выходн', 'когда работаете', 'во сколько'], responses: ['📅 Мы работаем ежедневно, без выходных: 9:00 – 20:00. В праздничные дни — по особому графику. В какое время вам удобно?'], quickReplies: ['📝 Записаться', '📍 Адрес', '📞 Позвонить'] },
     { id: 'address', triggers: ['адрес', 'где', 'находит', 'как добраться', 'метро', 'располож', 'дойти', 'доехать', 'парков', 'проезд'], responses: ['📍 Мы находимся по адресу: г. Кореновск, ул. Коммунистическая, 20а. Это в центре города. Ждём вас!'], quickReplies: ['🕐 Часы работы', '📝 Записаться', '📞 Позвонить'] },
     { id: 'masters', triggers: ['мастер', 'парикмахер', 'кто работает', 'специалист', 'стрижёт', 'стилист', 'колорист', 'татьяна'], responses: ['👩‍🦰 Наш мастер: Татьяна — старший мастер, стаж 25 лет. Стрижки, сложное окрашивание. К Татьяне хотите записаться?'], quickReplies: ['📝 К Татьяне', '💰 Цены'] },
-    { id: 'booking', triggers: ['запис', 'приём', 'визит', 'консульт', 'прийти', 'хочу к мастеру', 'свободн', 'ближайш'], responses: ['🎉 Отлично! Чтобы записаться, оставьте: 1️⃣ Номер телефона 2️⃣ Удобную дату и время. Администратор подтвердит запись в течение 5 минут. Или позвоните: +7 (918) 234-84-47'], quickReplies: ['📞 Позвонить', '💬 WhatsApp', '💬 Telegram'] },
+    { id: 'booking', triggers: ['запис', 'приём', 'визит', 'консульт', 'прийти', 'хочу к мастеру', 'свободн', 'ближайш'], responses: ['🎉 Отлично! Чтобы записаться, оставьте номер телефона и выберите удобное время в форме. Администратор подтвердит запись в течение 5 минут.'], quickReplies: ['📞 Позвонить', '📝 Открыть форму записи'] },
     { id: 'greeting', triggers: ['привет', 'здравств', 'добр', 'hello', 'hi', 'хай', 'добрый день', 'доброе утро'], responses: ['Здравствуйте! 👋 Я ТатьянаБот — виртуальный ассистент. Могу рассказать о ценах, мастерах, адресе или помочь с записью. Что вас интересует?'], quickReplies: ['💰 Цены', '📍 Адрес', '📝 Записаться', '👩‍🦰 Мастера'] },
     { id: 'thanks', triggers: ['спасиб', 'благодар', 'thanks', 'мерси'], responses: ['Пожалуйста! 😊 Рад был помочь. Если появятся ещё вопросы — я всегда на связи. Красивой вам причёски! ✂️'], quickReplies: ['💰 Цены', '📝 Записаться'] },
-    { id: 'contacts', triggers: ['телефон', 'позвон', 'связ', 'контакт', 'номер'], responses: ['📞 Наши контакты:\n• Телефон: +7 (918) 234-84-47\n• WhatsApp / Telegram: тот же номер\n📍 Адрес: Кореновск, ул. Коммунистическая, 20а'], quickReplies: ['📍 Адрес', '🕐 График', '📝 Записаться'] },
+    { id: 'contacts', triggers: ['телефон', 'позвон', 'связ', 'контакт', 'номер'], responses: ['📞 Наши контакты:\n• Телефон: +7 (918) 234-84-47\n📍 Адрес: Кореновск, ул. Коммунистическая, 20а'], quickReplies: ['📍 Адрес', '🕐 График', '📝 Записаться'] },
     { id: 'services_general', triggers: ['услуг', 'что делаете', 'чем занимает', 'какие процедуры', 'полн', 'всё что'], responses: ['✂️ Мы предлагаем: стрижки, окрашивание (балаяж, шатуш), уход за волосами (кератин, ботокс) и вечерние причёски. Что интересует подробнее?'], quickReplies: ['💰 Цены', '📝 Записаться', '👩‍🦰 Мастера'] }
 ];
 
@@ -812,7 +777,15 @@ function showAiQuickReplies(replies) {
         btn.onclick = () => {
             document.getElementById('aiQuickReplies').innerHTML = '';
             addAiUserMessage(reply);
-            processAiMessage(reply);
+            // ЕСЛИ НАЖАЛИ "ЗАПИСАТЬСЯ" - ОТКРЫВАЕМ ГЛАВНУЮ ФОРМУ
+            if (reply.includes('форму записи') || reply.includes('Записаться')) {
+                setTimeout(() => {
+                    openModal();
+                    if (chatOpen) toggleChat(); // Закрываем маленький чат, чтобы не мешал
+                }, 600);
+            } else {
+                processAiMessage(reply);
+            }
         };
         container.appendChild(btn);
     });
@@ -901,7 +874,15 @@ function showCQuickReplies(replies) {
         btn.onclick = () => {
             document.getElementById('chatQuickReplies').innerHTML = '';
             addCUserMsg(reply);
-            processCMessage(reply);
+            // ЕСЛИ НАЖАЛИ "ЗАПИСАТЬСЯ" - ОТКРЫВАЕМ ГЛАВНУЮ ФОРМУ
+            if (reply.includes('форму записи') || reply.includes('Записаться')) {
+                setTimeout(() => {
+                    openModal();
+                    if (chatOpen) toggleChat(); // Закрываем маленький чат
+                }, 600);
+            } else {
+                processCMessage(reply);
+            }
         };
         container.appendChild(btn);
     });
@@ -1027,10 +1008,11 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
 
     const data = { phone: phone, time: formattedTime };
 
+    // ИСПРАВЛЕНИЕ ДЛЯ GITHUB PAGES: text/plain вместо application/json
     fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(data)
     })
     .then(() => {
