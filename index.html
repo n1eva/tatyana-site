@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content">
 <title>Парикмахерская У Татьяны — Кореновск, ул. Коммунистическая, 20а</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +55,6 @@
     .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; }
     .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: white; padding: 10px 24px; border-radius: 100px; font-size: 14px; font-weight: 700; color: var(--text); box-shadow: var(--shadow-sm); border: 1px solid var(--border); margin-bottom: 32px; }
     .hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
-    /* ИСПРАВЛЕНИЕ ОБРЕЗАНИЯ БУКВ: уменьшен letter-spacing и увеличен line-height */
     .hero h1 { font-family: var(--font-heading); font-size: 72px; font-weight: 700; line-height: 1.15; margin-bottom: 24px; letter-spacing: -0.5px; color: var(--text); }
     .hero h1 span { font-style: italic; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-subtitle { font-size: 20px; color: var(--text-light); margin-bottom: 48px; max-width: 520px; }
@@ -160,6 +159,7 @@
     .ai-section .section-label { background: rgba(255, 255, 255, 0.1); color: #ffffff; border-color: rgba(255,255,255,0.2); }
     .ai-section .section-title { color: white; }
     .ai-section .section-subtitle { color: #a3a3a3; }
+    .ai-mobile-open { display: none; }
     .ai-container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 32px; overflow: hidden; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5); }
     .ai-header { padding: 28px 40px; background: rgba(255,255,255,0.03); display: flex; align-items: center; gap: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .ai-avatar { width: 64px; height: 64px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; position: relative; box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); }
@@ -259,7 +259,6 @@
     .modal-title { font-family: var(--font-heading); font-size: 32px; font-weight: 700; margin-bottom: 12px; text-align: center; color: var(--text); }
     .modal-subtitle { font-size: 16px; color: var(--text-light); text-align: center; margin-bottom: 32px; font-weight: 500; }
     .modal-form { display: flex; flex-direction: column; gap: 20px; }
-    /* ИСПРАВЛЕНИЕ ОБРЕЗАНИЯ БУКВ В ПОЛЯХ ВВОДА */
     .modal-input { width: 100%; padding: 20px 24px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 16px; font-family: inherit; outline: none; transition: all 0.2s; background: var(--bg-soft); color: var(--text); font-weight: 500; line-height: 1.5; }
     .modal-input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(0,0,0,0.05); }
     .modal-btn { width: 100%; padding: 22px; background: var(--gradient); color: white; border: none; border-radius: var(--radius-sm); font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: inherit; margin-top: 12px; }
@@ -269,42 +268,141 @@
     .form-message.success { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; display: block; }
     .form-message.error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; display: block; }
 
-    /* АДАПТИВ (МОБИЛЬНАЯ ВЕРСИЯ) */
+    /* ===== АДАПТИВ: КОМПАКТНАЯ МОБИЛЬНАЯ ВЕРСИЯ ===== */
     @media (max-width: 1024px) {
-        .hero h1 { font-size: 56px; }
+        .hero h1 { font-size: 52px; }
         .features-grid { grid-template-columns: repeat(2, 1fr); }
-        .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 56px; }
-        .footer-grid { grid-template-columns: 1fr 1fr; }
+        .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        section { padding: 88px 0; }
     }
     @media (max-width: 768px) {
-        .hero { padding: 140px 0 80px; }
-        .hero-grid { grid-template-columns: 1fr; gap: 64px; text-align: center; }
-        .hero h1 { font-size: 42px; line-height: 1.2; }
-        .hero-subtitle { margin: 0 auto 40px; font-size: 18px; }
-        .hero-buttons { justify-content: center; }
-        .hero-stats { justify-content: center; }
-        .hero-visual { height: 350px; } 
-        .services-grid, .doctors-grid, .reviews-grid, .contacts-grid { grid-template-columns: 1fr; }
-        .section-title { font-size: 36px; }
+        .container { padding: 0 16px; }
+        section { padding: 52px 0; }
+        .nav { padding: 10px 16px; }
+        .logo { font-size: 19px; gap: 8px; }
+        .logo-icon { width: 34px; height: 34px; font-size: 16px; border-radius: 10px; }
+        .hero { padding: 88px 0 40px; }
+        .hero-grid { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+        .hero-badge { padding: 7px 16px; font-size: 12px; margin-bottom: 16px; }
+        .hero h1 { font-size: 31px; line-height: 1.18; margin-bottom: 12px; }
+        .hero-subtitle { font-size: 15px; margin: 0 auto 20px; }
+        .hero-buttons { gap: 10px; margin-bottom: 24px; justify-content: center; }
+        .btn { padding: 14px 22px; font-size: 14px; }
+        .hero-stats { gap: 22px; justify-content: center; }
+        .stat-num { font-size: 26px; }
+        .stat-label { font-size: 12px; }
+        .hero-visual { height: 240px; }
+        .hero-3d-wrap { border-radius: 20px; }
+        .hero-card { padding: 9px 13px; gap: 9px; border-radius: 14px; }
+        .hero-card-icon { width: 32px; height: 32px; font-size: 16px; border-radius: 10px; }
+        .hero-card-title { font-size: 12.5px; }
+        .hero-card-sub { font-size: 10.5px; }
+        .hero-card-1 { top: 6px; left: 0; }
+        .hero-card-2 { bottom: 6px; right: 0; }
+        .hero-card-3 { bottom: 58px; left: 0; }
+        .section-header { margin-bottom: 28px; }
+        .section-label { font-size: 10px; padding: 6px 14px; margin-bottom: 10px; letter-spacing: 1.5px; }
+        .section-title { font-size: 26px; margin-bottom: 10px; }
+        .section-subtitle { font-size: 14px; }
+        .features-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .feature { padding: 20px 16px; border-radius: 18px; }
+        .feature-icon { width: 46px; height: 46px; font-size: 22px; border-radius: 14px; margin-bottom: 12px; }
+        .feature-title { font-size: 15px; margin-bottom: 6px; }
+        .feature-text { font-size: 12.5px; line-height: 1.5; }
+        .services-grid { grid-template-columns: 1fr; gap: 12px; }
+        .service { padding: 20px; gap: 16px; border-radius: 18px; }
+        .service-icon { width: 54px; height: 54px; font-size: 26px; border-radius: 16px; }
+        .service-title { font-size: 20px; margin-bottom: 6px; }
+        .service-text { font-size: 13px; margin-bottom: 12px; }
+        .service-price { font-size: 14px; padding: 8px 14px; }
+        .doctors-grid { gap: 16px; }
+        .doctor-photo { height: 210px; font-size: 88px; }
+        .doctor-badge { top: 12px; right: 12px; padding: 6px 12px; font-size: 11px; }
+        .doctor-info { padding: 20px; }
+        .doctor-name { font-size: 22px; }
+        .doctor-role { font-size: 13px; margin-bottom: 10px; }
+        .doctor-exp { font-size: 13px; }
+        .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 22px 14px; }
+        .step-num { width: 50px; height: 50px; font-size: 21px; border-width: 4px; margin-bottom: 12px; }
+        .step-title { font-size: 15px; margin-bottom: 6px; }
+        .step-text { font-size: 12.5px; }
+        .faq-item { margin-bottom: 10px; }
+        .faq-question { padding: 16px 18px; font-size: 15px; gap: 12px; }
+        .faq-toggle { width: 30px; height: 30px; font-size: 18px; }
+        .faq-answer { font-size: 13.5px; padding: 0 18px; }
+        .faq-item.open .faq-answer { padding: 0 18px 16px; }
+        .reviews-grid { grid-template-columns: 1fr; gap: 12px; }
+        .review { padding: 22px; border-radius: 18px; }
+        .review-stars { font-size: 16px; margin-bottom: 12px; }
+        .review-text { font-size: 13.5px; margin-bottom: 16px; }
+        .review-author { padding-top: 14px; gap: 12px; }
+        .review-avatar { width: 42px; height: 42px; font-size: 14px; }
+        .review-name { font-size: 14px; }
+        .review-date { font-size: 12px; }
+        .ai-section { padding: 52px 0; }
+        .ai-mobile-open { display: inline-flex; margin: 0 auto 18px; }
+        .ai-container { border-radius: 20px; }
+        .ai-header { padding: 14px 16px; gap: 12px; }
+        .ai-avatar { width: 42px; height: 42px; font-size: 20px; }
+        .ai-header-name { font-size: 16px; }
+        .ai-header-status { font-size: 12px; }
+        .ai-badge { padding: 5px 10px; font-size: 10px; }
+        .ai-messages { height: 300px; padding: 14px; gap: 12px; }
+        .ai-msg { padding: 12px 16px; font-size: 14px; border-radius: 16px; max-width: 92%; }
+        .ai-quick-replies { padding: 0 14px 12px; gap: 8px; }
+        .ai-quick-reply { padding: 9px 14px; font-size: 12.5px; }
+        .ai-input-wrap { padding: 12px 14px; gap: 10px; }
+        .ai-input { padding: 12px 16px; font-size: 16px; }
+        .ai-send { width: 44px; height: 44px; font-size: 18px; }
+        .ai-footer-note { padding: 12px; font-size: 11.5px; }
+        .contacts-grid { grid-template-columns: 1fr; gap: 20px; }
+        .contact-info { gap: 12px; }
+        .contact-item { padding: 16px; gap: 14px; border-radius: 14px; }
+        .contact-icon { width: 42px; height: 42px; font-size: 20px; border-radius: 12px; }
+        .contact-label { font-size: 12px; margin-bottom: 4px; }
+        .contact-value { font-size: 16px; }
+        .map-wrap { min-height: 260px; border-width: 4px; border-radius: 18px; }
+        footer { padding: 44px 0 24px; }
+        .footer-grid { grid-template-columns: 1fr 1fr; gap: 26px; margin-bottom: 30px; }
+        .footer-col h4 { font-size: 16px; margin-bottom: 12px; }
+        .footer-col a { font-size: 13px; padding: 5px 0; }
+        .footer-about { font-size: 13px; margin-top: 12px; }
+        .footer-bottom { padding-top: 20px; font-size: 12px; }
         .nav-links, .nav-phone { display: none; }
         .burger { display: flex; }
-        .nav-links.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 32px; gap: 20px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-lg); }
-        
-        /* Оптимизация чата и модалки для мобильных */
-        .chat-window { right: 16px; bottom: 100px; width: calc(100vw - 32px); height: 70vh; }
-        .chat-toggle { right: 20px; bottom: 20px; width: 64px; height: 64px; font-size: 28px; }
-        .modal-content { padding: 32px 20px; width: 95%; max-height: 90vh; overflow-y: auto; }
-        .ai-input-wrap, .ai-header { padding: 20px; }
-        .ai-messages { padding: 20px; height: 400px; }
+        .nav-links.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 20px 16px; gap: 14px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-lg); }
+        .nav-links.open a { font-size: 15px; }
+        /* ЧАТ НА ВЕСЬ ЭКРАН, КАК МЕССЕНДЖЕР */
+        .chat-toggle { right: 14px; bottom: 14px; width: 52px; height: 52px; font-size: 23px; }
+        .chat-window { top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; max-height: none; border-radius: 0; border: none; }
+        .chat-header { padding: 12px 14px; padding-top: calc(12px + env(safe-area-inset-top)); gap: 12px; }
+        .chat-avatar { width: 40px; height: 40px; font-size: 20px; }
+        .chat-header-name { font-size: 16px; }
+        .chat-header-status { font-size: 11.5px; }
+        .chat-close { width: 34px; height: 34px; font-size: 16px; }
+        .chat-messages { padding: 14px; gap: 12px; }
+        .c-msg { padding: 12px 16px; font-size: 14px; border-radius: 16px; max-width: 92%; }
+        .chat-quick-replies { padding: 0 14px 10px; gap: 8px; }
+        .chat-quick-reply { padding: 9px 14px; font-size: 12.5px; }
+        .chat-input-wrap { padding: 10px 10px calc(10px + env(safe-area-inset-bottom)); gap: 10px; }
+        .chat-input { padding: 12px 16px; font-size: 16px; }
+        .chat-send { width: 44px; height: 44px; font-size: 18px; }
+        .modal-content { padding: 26px 18px; width: 94%; max-height: 88vh; overflow-y: auto; border-radius: 22px; }
+        .modal-title { font-size: 22px; }
+        .modal-subtitle { font-size: 13px; margin-bottom: 20px; }
+        .modal-input { padding: 14px 16px; font-size: 16px; }
+        .modal-btn { padding: 16px; font-size: 16px; }
+        .modal-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 17px; }
     }
     @media (max-width: 480px) {
-        .hero h1 { font-size: 34px; }
+        .hero h1 { font-size: 27px; }
+        .hero-buttons { flex-direction: column; }
         .hero-buttons .btn { width: 100%; }
-        .hero-stats { flex-direction: column; gap: 32px; }
-        .features-grid, .steps-grid, .footer-grid { grid-template-columns: 1fr; }
-        section { padding: 80px 0; }
-        .ai-send { width: 48px; height: 48px; }
-        .modal-title { font-size: 26px; }
+        .hero-stats { gap: 16px; }
+        .section-title { font-size: 23px; }
+        .ai-messages { height: 260px; }
+        .footer-grid { grid-template-columns: 1fr; gap: 20px; }
     }
 </style>
 </head>
@@ -473,6 +571,9 @@
             <div class="section-label">🤖 ИИ-ассистент</div>
             <h2 class="section-title">Задайте вопрос <span class="gradient-text" style="background:linear-gradient(135deg,#ffffff,#a3a3a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">нашему ИИ</span></h2>
             <p class="section-subtitle">Умный помощник ответит на любой вопрос о услугах, ценах, мастерах и записи за секунды</p>
+        </div>
+        <div style="text-align:center;">
+            <button class="btn btn-primary ai-mobile-open" onclick="openMobileChat()">📱 Открыть чат на весь экран</button>
         </div>
         <div class="ai-container">
             <div class="ai-header">
@@ -777,11 +878,10 @@ function showAiQuickReplies(replies) {
         btn.onclick = () => {
             document.getElementById('aiQuickReplies').innerHTML = '';
             addAiUserMessage(reply);
-            // ЕСЛИ НАЖАЛИ "ЗАПИСАТЬСЯ" - ОТКРЫВАЕМ ГЛАВНУЮ ФОРМУ
-            if (reply.includes('форму записи') || reply.includes('Записаться')) {
+            if (reply.includes('форму записи') || reply.includes('Записаться') || reply.includes('К Татьяне')) {
                 setTimeout(() => {
                     openModal();
-                    if (chatOpen) toggleChat(); // Закрываем маленький чат, чтобы не мешал
+                    if (chatOpen) toggleChat();
                 }, 600);
             } else {
                 processAiMessage(reply);
@@ -811,7 +911,7 @@ const aiObserver = new IntersectionObserver((entries) => {
             aiFirstMessage = false;
             setTimeout(() => {
                 addAiBotMessage('Здравствуйте! 👋 Я — ТатьянаБот, ваш виртуальный ассистент.\n\nЗадайте мне любой вопрос о стрижках, окрашивании, ценах или записи — отвечу подробно и быстро.', false);
-                showAiQuickReplies(['💰 Цены', '📍 Адрес', '📝 Записаться', '👩‍🦰 Мастера', '✂️ Стрижка', '🎨 Окрашивание']);
+                showAiQuickReplies(['💰 Цены', '📍 Адрес', '📝 Записаться', '👩‍ Мастера', '✂️ Стрижка', '🎨 Окрашивание']);
             }, 500);
             aiObserver.disconnect();
         }
@@ -819,6 +919,7 @@ const aiObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 let chatOpen = false, firstMessage = true;
+function isMobile() { return window.matchMedia('(max-width: 768px)').matches; }
 function toggleChat() {
     chatOpen = !chatOpen;
     const win = document.getElementById('chatWindow');
@@ -827,6 +928,8 @@ function toggleChat() {
         win.classList.add('open');
         btn.classList.add('open');
         btn.innerHTML = '✕';
+        if (isMobile()) document.body.style.overflow = 'hidden';
+        fitChatToViewport();
         if (firstMessage) {
             firstMessage = false;
             setTimeout(() => {
@@ -838,8 +941,37 @@ function toggleChat() {
         win.classList.remove('open');
         btn.classList.remove('open');
         btn.innerHTML = '💬';
+        if (!document.getElementById('bookingModal').classList.contains('open')) document.body.style.overflow = '';
+        fitChatToViewport();
     }
 }
+function openMobileChat() {
+    if (!chatOpen) toggleChat();
+    setTimeout(() => {
+        const i = document.getElementById('chatInput');
+        if (i) i.focus();
+        const m = document.getElementById('chatMessages');
+        if (m) m.scrollTop = m.scrollHeight;
+    }, 350);
+}
+// Подгоняем высоту чата под видимую область (чтобы клавиатура не перекрывала поле ввода)
+function fitChatToViewport() {
+    const win = document.getElementById('chatWindow');
+    if (!win) return;
+    if (isMobile() && chatOpen && window.visualViewport) {
+        win.style.height = window.visualViewport.height + 'px';
+        win.style.top = window.visualViewport.offsetTop + 'px';
+    } else {
+        win.style.height = '';
+        win.style.top = '';
+    }
+}
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', fitChatToViewport);
+    window.visualViewport.addEventListener('scroll', fitChatToViewport);
+}
+window.addEventListener('resize', fitChatToViewport);
+
 function addCMsg(text) {
     const messages = document.getElementById('chatMessages');
     const typing = document.createElement('div');
@@ -874,11 +1006,10 @@ function showCQuickReplies(replies) {
         btn.onclick = () => {
             document.getElementById('chatQuickReplies').innerHTML = '';
             addCUserMsg(reply);
-            // ЕСЛИ НАЖАЛИ "ЗАПИСАТЬСЯ" - ОТКРЫВАЕМ ГЛАВНУЮ ФОРМУ
-            if (reply.includes('форму записи') || reply.includes('Записаться')) {
+            if (reply.includes('форму записи') || reply.includes('Записаться') || reply.includes('К Татьяне')) {
                 setTimeout(() => {
                     openModal();
-                    if (chatOpen) toggleChat(); // Закрываем маленький чат
+                    if (chatOpen) toggleChat();
                 }, 600);
             } else {
                 processCMessage(reply);
@@ -910,13 +1041,33 @@ function toggleFaq(el) {
 window.addEventListener('load', () => {
     const aiSection = document.getElementById('ai-assistant');
     if (aiSection) aiObserver.observe(aiSection);
+    const aiInput = document.getElementById('aiInput');
+    if (aiInput) aiInput.addEventListener('focus', function () {
+        setTimeout(() => this.scrollIntoView({ block: 'center', behavior: 'smooth' }), 300);
+    });
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) chatInput.addEventListener('focus', () => setTimeout(fitChatToViewport, 100));
 });
 
 // ==========================================================
-// --- АВТОМАТИЗАЦИЯ ЗАПИСИ (Google Apps Script) ---
+// --- АВТОМАТИЗАЦИЯ ЗАПИСИ: TELEGRAM + GOOGLE ТАБЛИЦА ---
 // ==========================================================
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyuFRbqY_aHshff5u0PqRnBbz2ZB6coqIjHar3g0FLMZneF7VydwKaFAw8nFnKcrADkSw/exec'; 
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyuFRbqY_aHshff5u0PqRnBbz2ZB6coqIjHar3g0FLMZneF7VydwKaFAw8nFnKcrADkSw/exec';
+
+// === TELEGRAM: сюда падают заявки ===
+const TG_TOKEN = '9081838414:AAGy8pghurpIN72oX5yeJMGp_MUVPXMEpFY';
+const TG_CHAT_ID = '6095288699';
+
+function sendToTelegram(text) {
+    return fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: TG_CHAT_ID, text: text, parse_mode: 'HTML' })
+    })
+    .then(r => r.json())
+    .then(j => { if (!j.ok) throw new Error(j.description || 'Telegram error'); return j; });
+}
 
 const phoneInput = document.getElementById('phoneInput');
 phoneInput.addEventListener('input', function(e) {
@@ -976,7 +1127,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
     const btn = document.getElementById('submitBtn');
     const msg = document.getElementById('formMessage');
     const formData = new FormData(this);
-    
+
     const phone = formData.get('phone').trim();
     const time = formData.get('time');
 
@@ -1008,24 +1159,32 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
 
     const data = { phone: phone, time: formattedTime };
 
-    // ИСПРАВЛЕНИЕ ДЛЯ GITHUB PAGES: text/plain вместо application/json
-    fetch(SCRIPT_URL, {
+    const tgText = '🔥 <b>Новая запись с сайта!</b>\n\n' +
+                   '📞 Телефон: ' + phone + '\n' +
+                   '⏰ Время: ' + formattedTime + '\n\n' +
+                   '<i>Перезвоните клиенту для подтверждения</i>';
+
+    // Отправляем ПАРАЛЛЕЛЬНО в Telegram и в Google Таблицу
+    const tgPromise = sendToTelegram(tgText).catch(err => { console.error('Telegram:', err); return null; });
+    const sheetPromise = fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(data)
-    })
-    .then(() => {
-        msg.textContent = '✅ Спасибо! Мы получили заявку и скоро перезвоним.';
-        msg.className = 'form-message success';
-        this.reset();
-        setTimeout(closeModal, 2500);
-    })
-    .catch(() => {
-        msg.textContent = '❌ Ошибка сети. Пожалуйста, позвоните нам: +7 (918) 234-84-47';
-        msg.className = 'form-message error';
-        btn.disabled = false;
-        btn.textContent = 'Записаться';
+    }).catch(() => null);
+
+    Promise.all([tgPromise, sheetPromise]).then(([tg, sheet]) => {
+        if (tg || sheet) {
+            msg.textContent = '✅ Спасибо! Мы получили заявку и скоро перезвоним.';
+            msg.className = 'form-message success';
+            this.reset();
+            setTimeout(closeModal, 2500);
+        } else {
+            msg.textContent = '❌ Ошибка сети. Пожалуйста, позвоните нам: +7 (918) 234-84-47';
+            msg.className = 'form-message error';
+            btn.disabled = false;
+            btn.textContent = 'Записаться';
+        }
     });
 });
 </script>
