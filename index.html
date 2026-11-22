@@ -35,7 +35,6 @@
     
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    @keyframes pulse-ring { 0% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.3); } 70% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 20px rgba(0, 0, 0, 0); } 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0); } }
     
     header { position: fixed; top: 0; left: 0; right: 0; background: rgba(252, 252, 252, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 100; border-bottom: 1px solid var(--border); transition: all 0.3s ease; }
     .nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; max-width: 1240px; margin: 0 auto; }
@@ -842,27 +841,11 @@ window.addEventListener('load', () => {
 });
 
 // ==========================================================
-// --- АВТОМАТИЗАЦИЯ ЗАПИСИ: TELEGRAM + GOOGLE APPS SCRIPT ---
+// --- АВТОМАТИЗАЦИЯ ЗАПИСИ: ТОЛЬКО ПОЧТА (Google Apps Script) ---
 // ==========================================================
 
+// ⚠️ ВАЖНО: вставь сюда URL веб-приложения из Apps Script (заканчивается на /exec)
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyuFRbqY_aHshff5u0PqRnBbz2ZB6coqIjHar3g0FLMZneF7VydwKaFAw8nFnKcrADkSw/exec';
-
-const TG_TOKEN = '9081838414:AAGy8pghurpIN72oX5yeJMGp_MUVPXMEpFY';
-const TG_CHAT_ID = '6095288699';
-
-function sendToTelegram(text) {
-    return fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: TG_CHAT_ID, text: text, parse_mode: 'HTML' })
-    })
-    .then(r => r.json())
-    .then(j => { 
-        console.log('Telegram response:', j);
-        if (!j.ok) throw new Error(j.description || 'Telegram error'); 
-        return j; 
-    });
-}
 
 const phoneInput = document.getElementById('phoneInput');
 phoneInput.addEventListener('input', function(e) {
@@ -931,7 +914,6 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
         msg.style.display = 'block';
         return;
     }
-
     if (!time) {
         msg.textContent = '❌ Выберите дату и время';
         msg.className = 'form-message error';
@@ -953,49 +935,30 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
     btn.textContent = 'Отправка...';
     msg.style.display = 'none';
 
-    const data = { phone: phone, time: formattedTime };
-
-    const tgText = '🔥 <b>Новая запись с сайта!</b>\n\n' +
-                   '📞 Телефон: ' + phone + '\n' +
-                   '⏰ Время: ' + formattedTime + '\n\n' +
-                   '<i>Перезвоните клиенту для подтверждения</i>';
-
-    console.log('Отправка заявки:', data);
-
-    // Telegram (параллельно с Apps Script)
-    const tgPromise = sendToTelegram(tgText)
-        .then(res => { console.log('✅ Telegram OK'); return 'tg'; })
-        .catch(err => { console.error('❌ Telegram error:', err); return null; });
-
-    // Google Apps Script (form-urlencoded — так надёжнее)
+    // Отправляем ТОЛЬКО в Google Apps Script (почта + таблица)
     const formBody = new URLSearchParams();
     formBody.append('phone', phone);
     formBody.append('time', formattedTime);
 
-    const sheetPromise = fetch(SCRIPT_URL, {
+    fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formBody.toString()
     })
-    .then(() => { console.log('✅ Google Script отправлен'); return 'sheet'; })
-    .catch(err => { console.error('❌ Google Script error:', err); return null; });
-
-    Promise.all([tgPromise, sheetPromise]).then(([tg, sheet]) => {
-        console.log('Результат:', { tg, sheet });
-        if (tg || sheet) {
-            msg.textContent = '✅ Спасибо! Мы получили заявку и скоро перезвоним.';
-            msg.className = 'form-message success';
-            msg.style.display = 'block';
-            document.getElementById('bookingForm').reset();
-            setTimeout(closeModal, 2500);
-        } else {
-            msg.textContent = '❌ Ошибка сети. Пожалуйста, позвоните нам: +7 (918) 234-84-47';
-            msg.className = 'form-message error';
-            msg.style.display = 'block';
-            btn.disabled = false;
-            btn.textContent = 'Записаться';
-        }
+    .then(() => {
+        msg.textContent = '✅ Спасибо! Мы получили заявку и скоро перезвоним.';
+        msg.className = 'form-message success';
+        msg.style.display = 'block';
+        document.getElementById('bookingForm').reset();
+        setTimeout(closeModal, 2500);
+    })
+    .catch(() => {
+        msg.textContent = '❌ Ошибка сети. Пожалуйста, позвоните нам: +7 (918) 234-84-47';
+        msg.className = 'form-message error';
+        msg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Записаться';
     });
 });
 </script>
