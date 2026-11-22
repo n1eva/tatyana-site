@@ -701,7 +701,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-// --- Логика ИИ-ассистента и остального сайта ---
+// --- Логика ИИ-ассистента ---
 const knowledgeBase = [
     { id: 'prices_general', triggers: ['цена', 'стоимость', 'сколько стоит', 'прайс', 'расценки', 'тариф', 'денег', 'дорого', 'дёшево', 'бюджет', 'сколько у вас', 'цены на'], responses: ['💰 Наши основные цены:\n\n• Стрижка — от 800 ₽\n• Окрашивание — от 2 500 ₽\n• Уход за волосами — от 1 500 ₽\n• Вечерняя причёска — от 2 000 ₽\n\nТочная цена зависит от длины волос и сложности. Что вас интересует?'], quickReplies: ['✂️ Стрижка', '🎨 Окрашивание', '✨ Уход', '📝 Записаться'] },
     { id: 'haircut', triggers: ['стрижк', 'подстрич', 'волосы', 'концы', 'длина', 'каскад', 'боб', 'каре'], responses: ['✂️ Стрижка — от 800 ₽. Включает мытьё головы, стрижку и укладку. Мастер подберёт форму под ваше лицо. Записать вас?'], quickReplies: ['📝 Записаться', '💰 Другие цены', '👩‍🦰 Мастера'] },
@@ -790,9 +790,7 @@ function showAiQuickReplies(replies) {
             document.getElementById('aiQuickReplies').innerHTML = '';
             addAiUserMessage(reply);
             if (reply.includes('форму записи') || reply.includes('Записаться') || reply.includes('К Татьяне')) {
-                setTimeout(() => {
-                    openModal();
-                }, 600);
+                setTimeout(() => { openModal(); }, 600);
             } else {
                 processAiMessage(reply);
             }
@@ -844,12 +842,11 @@ window.addEventListener('load', () => {
 });
 
 // ==========================================================
-// --- АВТОМАТИЗАЦИЯ ЗАПИСИ: TELEGRAM + GOOGLE ТАБЛИЦА ---
+// --- АВТОМАТИЗАЦИЯ ЗАПИСИ: TELEGRAM + GOOGLE APPS SCRIPT ---
 // ==========================================================
 
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyuFRbqY_aHshff5u0PqRnBbz2ZB6coqIjHar3g0FLMZneF7VydwKaFAw8nFnKcrADkSw/exec';
 
-// === TELEGRAM: сюда падают заявки ===
 const TG_TOKEN = '9081838414:AAGy8pghurpIN72oX5yeJMGp_MUVPXMEpFY';
 const TG_CHAT_ID = '6095288699';
 
@@ -860,15 +857,17 @@ function sendToTelegram(text) {
         body: JSON.stringify({ chat_id: TG_CHAT_ID, text: text, parse_mode: 'HTML' })
     })
     .then(r => r.json())
-    .then(j => { if (!j.ok) throw new Error(j.description || 'Telegram error'); return j; });
+    .then(j => { 
+        console.log('Telegram response:', j);
+        if (!j.ok) throw new Error(j.description || 'Telegram error'); 
+        return j; 
+    });
 }
 
 const phoneInput = document.getElementById('phoneInput');
 phoneInput.addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
-    if (value.startsWith('7') || value.startsWith('8')) {
-        value = value.substring(1);
-    }
+    if (value.startsWith('7') || value.startsWith('8')) value = value.substring(1);
     value = value.substring(0, 10);
     let formatted = '+7';
     if (value.length > 0) formatted += ' (' + value.substring(0, 3);
@@ -929,18 +928,21 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
     if (phoneDigits.length !== 11 || !phoneDigits.startsWith('7')) {
         msg.textContent = '❌ Введите корректный номер: +7 (XXX) XXX-XX-XX';
         msg.className = 'form-message error';
+        msg.style.display = 'block';
         return;
     }
 
     if (!time) {
         msg.textContent = '❌ Выберите дату и время';
         msg.className = 'form-message error';
+        msg.style.display = 'block';
         return;
     }
     const selectedDate = new Date(time);
     if (selectedDate <= new Date()) {
         msg.textContent = '❌ Нельзя выбрать прошедшее время';
         msg.className = 'form-message error';
+        msg.style.display = 'block';
         return;
     }
 
@@ -958,24 +960,39 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
                    '⏰ Время: ' + formattedTime + '\n\n' +
                    '<i>Перезвоните клиенту для подтверждения</i>';
 
-    // Отправляем ПАРАЛЛЕЛЬНО в Telegram и в Google Таблицу
-    const tgPromise = sendToTelegram(tgText).catch(err => { console.error('Telegram:', err); return null; });
+    console.log('Отправка заявки:', data);
+
+    // Telegram (параллельно с Apps Script)
+    const tgPromise = sendToTelegram(tgText)
+        .then(res => { console.log('✅ Telegram OK'); return 'tg'; })
+        .catch(err => { console.error('❌ Telegram error:', err); return null; });
+
+    // Google Apps Script (form-urlencoded — так надёжнее)
+    const formBody = new URLSearchParams();
+    formBody.append('phone', phone);
+    formBody.append('time', formattedTime);
+
     const sheetPromise = fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(data)
-    }).catch(() => null);
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formBody.toString()
+    })
+    .then(() => { console.log('✅ Google Script отправлен'); return 'sheet'; })
+    .catch(err => { console.error('❌ Google Script error:', err); return null; });
 
     Promise.all([tgPromise, sheetPromise]).then(([tg, sheet]) => {
+        console.log('Результат:', { tg, sheet });
         if (tg || sheet) {
             msg.textContent = '✅ Спасибо! Мы получили заявку и скоро перезвоним.';
             msg.className = 'form-message success';
-            this.reset();
+            msg.style.display = 'block';
+            document.getElementById('bookingForm').reset();
             setTimeout(closeModal, 2500);
         } else {
             msg.textContent = '❌ Ошибка сети. Пожалуйста, позвоните нам: +7 (918) 234-84-47';
             msg.className = 'form-message error';
+            msg.style.display = 'block';
             btn.disabled = false;
             btn.textContent = 'Записаться';
         }
